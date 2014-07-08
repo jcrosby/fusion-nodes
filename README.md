@@ -14,14 +14,14 @@ Your node should contain four files, all in one directory:
 3. A `package.json` file that lists your depencies; 
 4. Any icons needed for your node; 
 
-For example, if your node is named `Sharkfed`, here's what you would contribute:
+For example, if your node is named `Helium`, here's what you would contribute:
 
-* `sharkfed.js`
-* `sharkfed.html`
+* `helium.js`
+* `helium.html`
 * `package.json` 
-* `sharkfed.png`
+* `helium.png`
 
-All of these would be included in the `/sharkfed` directory that would itself live in the `/nodes` directory of this repo. 
+All of these would be included in the `/helium` directory that would itself live in the `/nodes` directory of this repo. 
 
 ### Creating a Node 
 
