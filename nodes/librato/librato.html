@@ -1,0 +1,107 @@
+<script type="text/x-red" data-template-name="librato">
+  <div class="form-row">
+    <label for="node-input-email"><i class="fa fa-envelope"></i> Email</label>
+    <input type="text" id="node-input-email" placeholder="person@example.com">
+  </div>
+  <div class="form-row">
+    <label for="node-input-key"><i class="fa fa-key"></i> API Key</label>
+    <input type="text" id="node-input-key" placeholder="abc123def45600000000">
+  </div>
+  <div class="form-row">
+    <label for="node-input-metric"><i class="fa fa-bookmark"></i> Metric</label>
+    <input type="text" id="node-input-metric" placeholder="example.metric.name">
+  </div>
+  <div class="form-row">
+    <label for="node-input-source"><i class="fa fa-cube"></i> Source</label>
+    <input type="text" id="node-input-source" placeholder="host.example.com">
+  </div>
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="librato">
+  <p>Librato is a complete solution for monitoring and analyzing your Helium dataflow. It provides everything you need to visualize, analyze, and actively alert on the metrics that matter to you.</p>
+
+  <h4>Setup</h4>
+    <ol>
+      <li>If you haven't already created a free Librato Metrics account, <a href="https://metrics.librato.com" target="_blank">do that first</a>.</li>
+      <li>In your Librato Metrics account, click the square in the upper right navigation to expose the dropdown menu. Select "account settings."</li>
+      <li>Click the key icon on the left to show your API Access Tokens.</li>
+      <li>Add a new "Record Only" token with a memorable name and save it.</li>
+      <li>In the Helium UI, drag a Librato node from the "output" category of the left menu onto your canvas.</li>
+      <li>Double click the Librato node to edit it. Add your Librato Metrics email address and the token that you created in step 4 above.</li>
+      <li>Wire an output from your data flow into the input of the Librato node.</li>
+    </ol>
+
+  <h4>Detailed Usage</h4>
+  <p>The Librato node expects to receive a <b>msg</b> object with this structure:</p>
+  <pre>
+{
+  name: '',          // metric name, optional, defaults to 'helium.default.metric.name'
+  value: '',         // measurement value, optional but recommended, defaults to 0
+  measure_time: '',  // unix timestamp, optional but recommended, defaults to current time
+  source: ''         // metric source name, optional, defaults to 'helium-host'
+}
+  </pre>
+
+  <p>Each <b>msg</b> object with these properites will be pushed to the <a href="https://metrics.librato.com" target="_blank">Librato Metrics</a> service.</p>
+
+  <h4>Testing</h4>
+
+  <ol>
+    <li>Wire up three nodes: inject -> function -> librato.</li>
+    <li>Double click the "function" node and replace the function content with:<br/>
+<pre>
+msg = {
+  name: 'helium.fn.test.name',
+  value: Math.floor(Math.random()*10).toString(),
+  measure_time: parseInt(new Date() / 1000),
+  source: 'helium.fn.test.source'
+};
+return msg;
+</pre></li>
+    <li>Click "Ok."</li>
+    <li>Configure the "librato" node as described above in "Setup."</li>
+    <li>Click "Deploy."</li>
+    <li>Click the button on the left of the "inject" node to send a measurement.</li>
+    <li>View your measurements in the <a href="https://metrics.librato.com" target="_blank">Librato Metrics</a> service.</li>
+  </ol>
+</script>
+
+<script type="text/javascript">
+  RED.nodes.registerType("librato", {
+    category: "output",
+    defaults: {
+      name: {
+        value: ""
+      },
+      email: {
+        value: "",
+        required: true
+      },
+      key: {
+        value: "",
+        required: true
+      },
+      metric: {
+        value: "" // does not appear to work, so just setting to blank here and overriding in js
+      },
+      source: {
+        value: "" // see above
+      }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "db.png",
+    color: "#0881ae",
+    align: 'right',
+    label: function() {
+      return this.name || "librato";
+    },
+    labelStyle: function() {
+      return this.name? "node_label_italic" : "";
+    }
+  });
+</script>
