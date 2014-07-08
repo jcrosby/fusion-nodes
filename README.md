@@ -25,8 +25,7 @@ All of these would be included in the `/sharkfed` directory that would itself li
 
 ### Creating a Node 
 
-* If you're just getting started, check out the [Node-RED docs on creating nodes](http://nodered.org/docs/creating-nodes/node-js.html)
-* You'll need Node-RED running locally to test your work. [It's pretty and is outlined here](http://nodered.org/docs/getting-started/running.html)
+* If you're just getting started, check out the [Node-RED docs on creating nodes](http://nodered.org/docs/creating-nodes/node-js.html).
 * In addition to the examples in this repository, there are also [some example nodes](https://github.com/node-red/node-red-nodes) you can take look at in Node-RED proper for inspiration. 
 
 ### Support 
