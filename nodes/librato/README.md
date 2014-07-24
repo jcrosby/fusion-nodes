@@ -6,10 +6,10 @@ Description
 
 Deploy librato-helium as a custom metrics node in your [Helium Fusion](https://www.helium.co) dataflow. Metrics sent to the Librato node will be posted to the [Librato Metrics](https://metrics.librato.com) service.
 
-Install
--------
+Developer Test Installation
+---------------------------
 
-Run this in the root directory of your Helium Fusion install:
+Run this in the root directory of your NodeRED install:
 
 ```
 npm install librato-helium
@@ -22,7 +22,7 @@ Setup
 2. In your Librato Metrics account, click the square in the upper right navigation to expose the dropdown menu. Select "account settings."
 3. Click the key icon on the left to show your API Access Tokens.
 4. Add a new "Record Only" token with a memorable name and save it.
-5. In the Helium UI, drag a Librato node from the "output" category of the left menu onto your canvas.
+5. In the Helium UI, drag a Librato node from the "Analysis" category of the left menu onto your canvas.
 6. Double click the Librato node to edit it. Add your Librato Metrics email address and the token that you created in step 4 above.
 7. Wire an output from your data flow into the input of the Librato node.
 
@@ -57,6 +57,6 @@ Testing
         return msg;
 3. Click "Ok."
 4. Configure the "librato" node as described above in "Setup."
-5. Click "Deploy."
+5. Click "Save Flow."
 6. Click the button on the left of the "inject" node to send a measurement.
 7. View your measurements in the [Librato Metrics](https://metrics.librato.com) service.
